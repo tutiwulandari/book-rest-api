@@ -1,10 +1,10 @@
 package com.mightyjava.service.impl;
 
-import java.util.Collection;
-
+import org.springframework.data.domain.Pageable;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.mightyjava.domain.Book;
@@ -13,13 +13,13 @@ import com.mightyjava.service.IService;
 
 @Service
 public class BookServiceImpl implements IService<Book> {
-	
+
 	@Autowired
 	private BookRepository bookRepository;
 
 	@Override
-	public Collection<Book> findAll() {
-		return bookRepository.findAll();
+	public Page<Book> findAll(Pageable pageable) {
+		return bookRepository.findAll(pageable);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class BookServiceImpl implements IService<Book> {
 
 	@Override
 	public Book saveOrUpdate(Book book) {
-		return bookRepository.saveAndFlush(book);
+		return bookRepository.save(book);
 	}
 
 	@Override
