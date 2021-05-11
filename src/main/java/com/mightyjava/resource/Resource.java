@@ -1,9 +1,7 @@
 package com.mightyjava.resource;
 
-import java.util.Collection;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface Resource<T> {
 	@GetMapping
-	ResponseEntity<Page<T>> findAll(Pageable pageable);
+	ResponseEntity<Page<T>> findAll(int pageNumber, int pageSize, String sortBy, String sortDir );
 
 	@GetMapping("{id}")
 	ResponseEntity<T> findById(@PathVariable Long id);
