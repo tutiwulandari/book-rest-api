@@ -8,12 +8,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mightyjava.domain.Book;
 import com.mightyjava.resource.Resource;
 import com.mightyjava.service.IService;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 @RestController
 @RequestMapping("/books")
@@ -52,6 +57,16 @@ public class BookResourceImpl implements Resource<Book> {
 	@Override
 	public ResponseEntity<String> deleteById(Long id) {
 		return new ResponseEntity<>(bookService.deleteById(id), HttpStatus.OK);
+	}
+
+	@GetMapping("/languages")
+	public  ResponseEntity<Set<String>> findAllLanguages() {
+		return new ResponseEntity<>(new TreeSet<>(Arrays.asList("French", "Portuguese", "English", "Russian", "Hindi", "Arabic", "Spanish", "Chinese")), HttpStatus.OK);
+	}
+
+	@GetMapping("/genres")
+	public ResponseEntity<Set<String>> findAllGenres() {
+		return new ResponseEntity<>(new TreeSet<>(Arrays.asList("Technology", "Science", "History","Comedy")), HttpStatus.OK);
 	}
 
 }
