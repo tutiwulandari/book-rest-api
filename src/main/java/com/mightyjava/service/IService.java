@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface IService<T> {
+	Page<T> findAll(Pageable pageable, String searchText);
+
 	Page<T> findAll(Pageable pageable);
 
 	T findById(Long id);

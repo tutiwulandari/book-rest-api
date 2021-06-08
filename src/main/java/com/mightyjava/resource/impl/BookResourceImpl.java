@@ -2,15 +2,15 @@ package com.mightyjava.resource.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Pageable;
+
 
 import com.mightyjava.domain.Book;
 import com.mightyjava.resource.Resource;
@@ -40,6 +40,11 @@ public class BookResourceImpl implements Resource<Book> {
 	}
 
 	@Override
+	public ResponseEntity<Page<Book>> findAll(Pageable pageable, String searchText) {
+		return new ResponseEntity<>(bookService.findAll(pageable, searchText), HttpStatus.OK);
+	}
+
+	@Override
 	public ResponseEntity<Book> findById(Long id) {
 		return new ResponseEntity<>(bookService.findById(id), HttpStatus.OK);
 	}
@@ -61,7 +66,7 @@ public class BookResourceImpl implements Resource<Book> {
 
 	@GetMapping("/languages")
 	public  ResponseEntity<Set<String>> findAllLanguages() {
-		return new ResponseEntity<>(new TreeSet<>(Arrays.asList("French", "Portuguese", "English", "Russian", "Hindi", "Arabic", "Spanish", "Chinese")), HttpStatus.OK);
+		return new ResponseEntity<>(new TreeSet<>(Arrays.asList("French", "Portuguese", "English", "Russian", "Hindia", "Arabic", "Spanish", "Chinese")), HttpStatus.OK);
 	}
 
 	@GetMapping("/genres")
